@@ -18,22 +18,25 @@ Skills
 
 Resources
 ----------
-[Immediately Invoked Function Expression (IIFE)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
-[Using Objects to Organize Your Code](http://rmurphey.com/blog/2009/10/15/using-objects-to-organize-your-code/)
-[Learning Javascript Design Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+* [Immediately Invoked Function Expression (IIFE)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
+* [Using Objects to Organize Your Code](http://rmurphey.com/blog/2009/10/15/using-objects-to-organize-your-code/)
+* [Learning Javascript Design Patterns](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)
 
 Requirements
 ------------
 ###Part I: Organizing code with object literals
 
 1. Define an object literal with two properties: repeatString and repeatFunction:
+
 ```
 var Repeater = {
  repeatString: ...,
  repeatFunction: ...
 };
 ```
-2. Set up a Jasmine unit test with the below test spec. Follow the instructions in Test Drive 102 if you need a reminder on how to create unit tests with Jasmine.
+
+2. Set up a Jasmine unit test with the below test spec.
+
 ```
 describe('repeatString', function() {
  it('should return a string repeated n times', function() {
@@ -50,6 +53,7 @@ describe('repeatFunction', function() {
  });
 });
 ```
+
 3. Implement repeatString and repeatFunction to make the tests pass (test driven development).
 
 Functions are defined inside the Repeater object, they are self-contained and won't conflict with global functions with the same name. This demonstrates the principle of encapsulation; code is grouped together and separated from other code within the project.
@@ -57,15 +61,18 @@ Functions are defined inside the Repeater object, they are self-contained and wo
 ###Part II: Organizing code with the module pattern
 
 1. Define an Immediately Invoked Function Expression (IIFE)
+
 ```
 var Repeater = (function() {
  ...
 })();
 ```
+
 2. Inside the IIFE, return an object literal with repeatString and repeatFunction defined.
 3. Refresh your test runner and ensure the tests still pass.
 4. Create a new function repeatMore which is the same as repeatString but only takes a single argument (the string) and repeats the string once the first time it is called, twice the second time it is called, etc. You will need to declare a local variable count which keeps track of how many times you have called the function.
 e.g.
+
 ```
 Repeater.repeatMore('cat'); // cat
 Repeater.repeatMore('dog'); // dogdog
@@ -73,11 +80,14 @@ Repeater.repeatMore('bat'); // batbatbat
 Repeater.repeatMore('lion'); // lionlionlionlion
 Repeater.repeatMore('lemur'); // lemurlemurlemurlemurlemur
 ```
+
 5. Refresh your test runner and ensure the tests still pass.
 6. Add the following code to your test spec to test that the local variable inside your IIFE is not accessible in the global scope. (If you didn't name your variable count, change the test below to use your variable name.)
+
 ```
 expect(typeof count).toBe('undefined');
 ```
+
 7. Refresh your test runner and ensure the tests still pass.
 
 It makes sense to keep variables private to your module (i.e. not accessible outside your module). The public interface (the variables or functions that users of your module access) is thus cleaner, easier to understand, and less susceptible to conflicts. This is what the module pattern accomplishes through the handy scoping effects of the IIFE.
